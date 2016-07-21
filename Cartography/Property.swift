@@ -32,7 +32,7 @@ public protocol NumericalEquality : Property { }
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func == (lhs: NumericalEquality, rhs: CGFloat) -> NSLayoutConstraint {
+@discardableResult public func == (lhs: NumericalEquality, rhs: CGFloat) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, coefficients: Coefficients(1, rhs))
 }
 
@@ -48,7 +48,7 @@ public protocol RelativeEquality : Property { }
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func == <P: RelativeEquality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
+@discardableResult public func == <P: RelativeEquality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs.value, coefficients: rhs.coefficients[0])
 }
 
@@ -58,7 +58,7 @@ public func == <P: RelativeEquality>(lhs: P, rhs: Expression<P>) -> NSLayoutCons
 ///             `translatesAutoresizingMaskIntoConstraints` set to `false`.
 /// - parameter rhs: The other property.
 ///
-public func == <P: RelativeEquality>(lhs: P, rhs: P) -> NSLayoutConstraint {
+@discardableResult public func == <P: RelativeEquality>(lhs: P, rhs: P) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs)
 }
 
@@ -76,7 +76,7 @@ public protocol NumericalInequality : Property { }
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func <= (lhs: NumericalInequality, rhs: CGFloat) -> NSLayoutConstraint {
+@discardableResult public func <= (lhs: NumericalInequality, rhs: CGFloat) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, coefficients: Coefficients(1, rhs), relation: NSLayoutRelation.lessThanOrEqual)
 }
 
@@ -88,7 +88,7 @@ public func <= (lhs: NumericalInequality, rhs: CGFloat) -> NSLayoutConstraint {
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func >= (lhs: NumericalInequality, rhs: CGFloat) -> NSLayoutConstraint {
+@discardableResult public func >= (lhs: NumericalInequality, rhs: CGFloat) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, coefficients: Coefficients(1, rhs), relation: NSLayoutRelation.greaterThanOrEqual)
 }
 
@@ -104,7 +104,7 @@ public protocol RelativeInequality : Property { }
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func <= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
+@discardableResult public func <= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs, relation: NSLayoutRelation.lessThanOrEqual)
 }
 
@@ -116,7 +116,7 @@ public func <= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func >= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
+@discardableResult public func >= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs, relation: NSLayoutRelation.greaterThanOrEqual)
 }
 
@@ -128,7 +128,7 @@ public func >= <P: RelativeInequality>(lhs: P, rhs: P) -> NSLayoutConstraint {
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func <= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
+@discardableResult public func <= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs.value, coefficients: rhs.coefficients[0], relation: NSLayoutRelation.lessThanOrEqual)
 }
 
@@ -140,7 +140,7 @@ public func <= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutCo
 ///
 /// - returns: An `NSLayoutConstraint`.
 ///
-public func >= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
+@discardableResult public func >= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutConstraint {
     return lhs.context.addConstraint(lhs, to: rhs.value, coefficients: rhs.coefficients[0], relation: NSLayoutRelation.greaterThanOrEqual)
 }
 
@@ -148,35 +148,35 @@ public func >= <P: RelativeInequality>(lhs: P, rhs: Expression<P>) -> NSLayoutCo
 
 public protocol Addition : Property { }
 
-public func + <P: Addition>(c: CGFloat, rhs: P) -> Expression<P> {
+@discardableResult public func + <P: Addition>(c: CGFloat, rhs: P) -> Expression<P> {
     return Expression(rhs, [ Coefficients(1, c) ])
 }
 
-public func + <P: Addition>(lhs: P, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func + <P: Addition>(lhs: P, rhs: CGFloat) -> Expression<P> {
     return rhs + lhs
 }
 
-public func + <P: Addition>(c: CGFloat, rhs: Expression<P>) -> Expression<P> {
+@discardableResult public func + <P: Addition>(c: CGFloat, rhs: Expression<P>) -> Expression<P> {
     return Expression(rhs.value, rhs.coefficients.map { $0 + c })
 }
 
-public func + <P: Addition>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func + <P: Addition>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
     return rhs + lhs
 }
 
-public func - <P: Addition>(c: CGFloat, rhs: P) -> Expression<P> {
+@discardableResult public func - <P: Addition>(c: CGFloat, rhs: P) -> Expression<P> {
     return Expression(rhs, [ Coefficients(1, -c) ])
 }
 
-public func - <P: Addition>(lhs: P, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func - <P: Addition>(lhs: P, rhs: CGFloat) -> Expression<P> {
     return rhs - lhs
 }
 
-public func - <P: Addition>(c: CGFloat, rhs: Expression<P>) -> Expression<P> {
+@discardableResult public func - <P: Addition>(c: CGFloat, rhs: Expression<P>) -> Expression<P> {
     return Expression(rhs.value, rhs.coefficients.map { $0 - c})
 }
 
-public func - <P: Addition>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func - <P: Addition>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
     return rhs - lhs
 }
 
@@ -184,26 +184,26 @@ public func - <P: Addition>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
 
 public protocol Multiplication : Property { }
 
-public func * <P: Multiplication>(m: CGFloat, rhs: Expression<P>) -> Expression<P> {
+@discardableResult public func * <P: Multiplication>(m: CGFloat, rhs: Expression<P>) -> Expression<P> {
     return Expression(rhs.value, rhs.coefficients.map { $0 * m })
 }
 
-public func * <P: Multiplication>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func * <P: Multiplication>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
     return rhs * lhs
 }
 
-public func * <P: Multiplication>(m: CGFloat, rhs: P) -> Expression<P> {
+@discardableResult public func * <P: Multiplication>(m: CGFloat, rhs: P) -> Expression<P> {
     return Expression(rhs, [ Coefficients(m, 0) ])
 }
 
-public func * <P: Multiplication>(lhs: P, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func * <P: Multiplication>(lhs: P, rhs: CGFloat) -> Expression<P> {
     return rhs * lhs
 }
 
-public func / <P: Multiplication>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func / <P: Multiplication>(lhs: Expression<P>, rhs: CGFloat) -> Expression<P> {
     return lhs * (1 / rhs)
 }
 
-public func / <P: Multiplication>(lhs: P, rhs: CGFloat) -> Expression<P> {
+@discardableResult public func / <P: Multiplication>(lhs: P, rhs: CGFloat) -> Expression<P> {
     return lhs * (1 / rhs)
 }

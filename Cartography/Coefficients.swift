@@ -22,40 +22,40 @@ public struct Coefficients {
 
 // MARK: Addition
 
-public func + (c: CGFloat, rhs: Coefficients) -> Coefficients {
+@discardableResult public func + (c: CGFloat, rhs: Coefficients) -> Coefficients {
     return Coefficients(rhs.multiplier, rhs.constant + c)
 }
 
-public func + (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
+@discardableResult public func + (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
     return rhs + lhs
 }
 
 // MARK: Subtraction
 
-public func - (c: CGFloat, rhs: Coefficients) -> Coefficients {
+@discardableResult public func - (c: CGFloat, rhs: Coefficients) -> Coefficients {
     return Coefficients(rhs.multiplier, rhs.constant - c)
 }
 
-public func - (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
+@discardableResult public func - (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
     return rhs - lhs
 }
 
 // MARK: Multiplication
 
-public func * (m: CGFloat, rhs: Coefficients) -> Coefficients {
+@discardableResult public func * (m: CGFloat, rhs: Coefficients) -> Coefficients {
     return Coefficients(rhs.multiplier * m, rhs.constant * m)
 }
 
-public func * (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
+@discardableResult public func * (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
     return rhs * lhs
 }
 
 // MARK: Division
 
-public func / (m: CGFloat, rhs: Coefficients) -> Coefficients {
+@discardableResult public func / (m: CGFloat, rhs: Coefficients) -> Coefficients {
     return Coefficients(rhs.multiplier / m, rhs.constant / m)
 }
 
-public func / (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
+@discardableResult public func / (lhs: Coefficients, rhs: CGFloat) -> Coefficients {
     return rhs / lhs
 }
