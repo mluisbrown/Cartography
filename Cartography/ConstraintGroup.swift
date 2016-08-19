@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class ConstraintGroup {
-    private var constraints: [Constraint] = []
+open class ConstraintGroup {
+    fileprivate var constraints: [Constraint] = []
 
     @available(OSX, introduced: 10.10)
     @available(iOS, introduced: 8.0)
-    public var active: Bool {
+    open var active: Bool {
         get {
             return constraints
                 .map { $0.layoutConstraint.isActive }

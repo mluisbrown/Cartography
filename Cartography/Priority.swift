@@ -16,7 +16,7 @@ import AppKit
 public typealias LayoutPriority = NSLayoutPriority
 #endif
 
-infix operator  ~ { }
+infix operator  ~ : DefaultPrecedence
 
 /// Sets the priority for a constraint.
 ///

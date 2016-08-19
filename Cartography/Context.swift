@@ -12,7 +12,7 @@ import UIKit
 import AppKit
 #endif
 
-public class Context {
+open class Context {
     internal var constraints: [Constraint] = []
 
     internal func addConstraint(_ from: Property, to: Property? = nil, coefficients: Coefficients = Coefficients(), relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
